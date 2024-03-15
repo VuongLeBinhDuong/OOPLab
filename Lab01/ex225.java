@@ -15,7 +15,11 @@ public class ex225 {
 		System.out.println("Sum: " + sum);
 		System.out.println("Different: " + different);
 		System.out.println("Product: " + product);
-		System.out.println("Quotient: " + quotient);
-		
+		if (num2 != 0) {
+			System.out.println("Quotient: " + quotient);
+		}
+		else{
+			System.out.println("There is no quotient since num2 = 0");
+		}
 	}
 }
