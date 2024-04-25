@@ -37,7 +37,7 @@ public class Store {
 
     public Media searchTitle(String title) {
         int cnt = 0;
-        Media item = new Media();
+        Media item = null;
         for (int i=0;i<itemsInStore.size(); i++) {
             if (itemsInStore.get(i).isMatch(title)) {
                 cnt++;

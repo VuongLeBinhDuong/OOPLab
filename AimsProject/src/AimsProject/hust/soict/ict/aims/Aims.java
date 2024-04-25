@@ -69,7 +69,7 @@ public class Aims {
 				input.nextLine();
 				String inputTitle = input.nextLine();
 				Media searchTitle = store.searchTitle(inputTitle);
-				if (searchTitle.getTitle() != null){
+				if (searchTitle != null){
 					seeAMediaDetail(searchTitle);
 				}
 				else{
@@ -83,7 +83,7 @@ public class Aims {
 				input.nextLine();
 				String inputTitle = input.nextLine();
 				Media searchTitle = store.searchTitle(inputTitle);
-				if (searchTitle.getTitle() != null){
+				if (searchTitle != null){
 					cart.addMedia(searchTitle);
 				}
 				cart.print();
@@ -96,7 +96,7 @@ public class Aims {
 				input.nextLine();
 				String inputTitle = input.nextLine();
 				Media searchTitle = store.searchTitle(inputTitle);
-				if (searchTitle.getTitle() != null){
+				if (searchTitle != null){
 					playMedia(searchTitle);
 				}
 				viewStore();
@@ -179,7 +179,7 @@ public class Aims {
 					System.out.println("Enter the ID: ");
 					int inputId = input.nextInt();
 					Media searchId = cart.searchId(inputId);
-					if (searchId.getId() != 0){
+					if (searchId != null){
 						System.out.println(searchId.toString());
 					}
 					else{
@@ -190,7 +190,7 @@ public class Aims {
 					System.out.println("Enter the title: ");
 					String inputTitle = input.nextLine();
 					Media searchTitle = cart.searchTitle(inputTitle);
-					if (searchTitle.getTitle() != null){
+					if (searchTitle != null){
 						System.out.println(searchTitle.toString());
 					}
 				}
@@ -392,7 +392,7 @@ public class Aims {
 			}
 			case 3: {
 				cart.print();
-				viewStore();
+				seeCurrentCart();
 				break;
 			}
 			case 0: {

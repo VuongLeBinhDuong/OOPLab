@@ -45,7 +45,7 @@ public class Cart {
 	}
 	public Media searchTitle(String title) {
 		int cnt = 0;
-		Media item = new Media();
+		Media item = null;
 		for (int i=0;i<itemsOrdered.size(); i++) {
 			if (itemsOrdered.get(i).isMatch(title)) {
 				cnt++;
@@ -60,7 +60,7 @@ public class Cart {
 
 	public Media searchId(int Id) {
 		int cnt = 0;
-		Media item = new Media();
+		Media item = null;
 		for (int i=0;i<itemsOrdered.size(); i++) {
 			if (itemsOrdered.get(i).getId() == Id) {
 				cnt++;
