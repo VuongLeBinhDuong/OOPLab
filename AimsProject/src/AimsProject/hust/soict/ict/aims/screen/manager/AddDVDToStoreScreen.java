@@ -26,10 +26,10 @@ public class AddDVDToStoreScreen extends AddItemToStoreScreen{
             }
         });
 
-        center.add(lengthLabel);
-        center.add(lengthField);
-        center.add(directorLabel);
-        center.add(directorField);
+        center.add(lengthLabel, labelConstrains);
+        center.add(lengthField, fieldConstrains);
+        center.add(directorLabel, labelConstrains);
+        center.add(directorField, fieldConstrains);
         center.add(addButton);
     }
 

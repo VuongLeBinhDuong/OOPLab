@@ -9,9 +9,19 @@ public abstract class AddItemToStoreScreen extends JPanel{
     protected Store store;
     protected JTextField idField, titleField, categoryField, costField;
     protected JPanel center = new JPanel();
+    protected GridBagConstraints labelConstrains = new GridBagConstraints();
+    protected GridBagConstraints fieldConstrains = new GridBagConstraints();
     public AddItemToStoreScreen(Store store){
         this.store = store;
-        center.setLayout(new GridLayout(10, 1));
+        center.setLayout(new GridBagLayout());
+        labelConstrains.gridwidth = 1;
+        labelConstrains.gridx = 0;
+        labelConstrains.gridy = GridBagConstraints.RELATIVE;
+        labelConstrains.anchor = GridBagConstraints.EAST;
+        labelConstrains.insets = new Insets(2, 2, 2, 2);
+        fieldConstrains.gridwidth = GridBagConstraints.REMAINDER;
+        fieldConstrains.gridx = 1;
+        fieldConstrains.fill = GridBagConstraints.HORIZONTAL;
         JLabel idLabel = new JLabel("ID");
         idField = new JTextField(20);
         JLabel titleLabel = new JLabel("TITLE");
@@ -21,14 +31,14 @@ public abstract class AddItemToStoreScreen extends JPanel{
         JLabel costLabel = new JLabel("COST");
         costField = new JTextField(20);
 
-        center.add(idLabel);
-        center.add(idField);
-        center.add(titleLabel);
-        center.add(titleField);
-        center.add(categoryLabel);
-        center.add(categoryField);
-        center.add(costLabel);
-        center.add(costField);
+        center.add(idLabel, labelConstrains);
+        center.add(idField, fieldConstrains);
+        center.add(titleLabel, labelConstrains);
+        center.add(titleField, fieldConstrains);
+        center.add(categoryLabel, labelConstrains);
+        center.add(categoryField, fieldConstrains);
+        center.add(costLabel, labelConstrains);
+        center.add(costField, fieldConstrains);
 
         add(center, BorderLayout.CENTER);
     }

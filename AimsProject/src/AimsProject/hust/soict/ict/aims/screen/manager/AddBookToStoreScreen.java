@@ -27,8 +27,8 @@ public class AddBookToStoreScreen extends AddItemToStoreScreen{
             }
         });
 
-        center.add(authorLabel);
-        center.add(authorScrollPane);
+        center.add(authorLabel, labelConstrains);
+        center.add(authorScrollPane, fieldConstrains);
         center.add(addButton);
     }
 

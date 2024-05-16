@@ -54,8 +54,8 @@ public class AddCDToStoreScreen extends AddItemToStoreScreen{
         super(store);
         JLabel directorLabel  = new JLabel("DIRECTOR");
         directorField = new JTextField(20);
-        center.add(directorLabel);
-        center.add(directorField);
+        center.add(directorLabel, labelConstrains);
+        center.add(directorField, fieldConstrains);
         JLabel artistLabel = new JLabel("ARTIST");
         artistField = new JTextField(20);
 
@@ -63,8 +63,8 @@ public class AddCDToStoreScreen extends AddItemToStoreScreen{
         trackPanel.setLayout(new BoxLayout(trackPanel, BoxLayout.Y_AXIS));
         trackPanels = new ArrayList<>();
 
-        center.add(artistLabel);
-        center.add(artistField);
+        center.add(artistLabel, labelConstrains);
+        center.add(artistField, fieldConstrains);
 
         center.add(new JLabel("TRACKS"));
         center.add(trackPanel);
@@ -74,7 +74,7 @@ public class AddCDToStoreScreen extends AddItemToStoreScreen{
             addTrack();
         });
 
-        center.add(addTrackButton);
+        center.add(addTrackButton, fieldConstrains);
 
         addButton = new JButton("ADD CD");
         addButton.addActionListener(new ActionListener() {
@@ -95,7 +95,7 @@ public class AddCDToStoreScreen extends AddItemToStoreScreen{
         scrollPane.setPreferredSize(preferredSize);
         add(scrollPane, BorderLayout.CENTER);
 
-        center.add(addButton);
+        center.add(addButton, fieldConstrains);
 
     }
 
@@ -122,8 +122,15 @@ public class AddCDToStoreScreen extends AddItemToStoreScreen{
         categoryField.setText("");
         costField.setText("");
         directorField.setText("");
+        artistField.setText("");
+        for (trackPanel tp : trackPanels) {
+            tp.nameField.setText("");
+            tp.lengthField.setText("");
+        }
+        trackPanel.removeAll();
         trackPanels.clear();
-
+        trackPanel.revalidate();
+        trackPanel.repaint();
     }
 
     public static void main(String[] args) {
