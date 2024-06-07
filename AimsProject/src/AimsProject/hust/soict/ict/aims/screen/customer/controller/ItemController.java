@@ -25,13 +25,8 @@ public class ItemController {
     @FXML
     private Label lblCost;
     @FXML
-    void btnAddtoCartClicked(ActionEvent event) throws CartFullException {
-        if(cart.getItemsOrdered().size() < cart.MAX_NUMBERS_ORDERS){
-            if (cart != null && media != null) {
-                cart.addMedia(media);
-            }
-        }
-        else {
+    void btnAddtoCartClicked(ActionEvent event) throws CartFullException, PlayerException {
+        if(cart.getItemsOrdered().size() >=  cart.MAX_NUMBERS_ORDERS){
             String errorMessage = "ERROR: Cart is full";
             System.err.println(errorMessage);
             Platform.runLater(() -> {
@@ -41,6 +36,51 @@ public class ItemController {
                 alert.setContentText(errorMessage);
                 alert.showAndWait();
             });
+        } else if (media instanceof DigitalVideoDisc && ((DigitalVideoDisc) media).getLength() == 0) {
+            String errorMessage = "ERROR: DigitalVideoDisc length is non-positive. Cannot add to cart.";
+            System.err.println(errorMessage);
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Illegal DVD Length");
+                alert.setHeaderText(null);
+                alert.setContentText(errorMessage);
+                alert.showAndWait();
+            });
+        } else if (media instanceof CompactDisc){
+            if(((CompactDisc) media).getLength() == 0){
+                String errorMessage = "ERROR: CD length is non-positive. Cannot add to cart.";
+                System.err.println(errorMessage);
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Illegal CD Length");
+                    alert.setHeaderText(null);
+                    alert.setContentText(errorMessage);
+                    alert.showAndWait();
+                });
+            }
+            else {
+                boolean hasZeroLengthTrack = false;
+                for (Track track : ((CompactDisc) media).getTracks()) {
+                    if (track.getLength() == 0) {
+                        hasZeroLengthTrack = true;
+                    }
+                }
+                if (hasZeroLengthTrack) {
+                    String errorMessage = "ERROR: CD contains a track with zero length. Cannot add to cart.";
+                    System.err.println(errorMessage);
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Illegal Track Length");
+                        alert.setHeaderText(null);
+                        alert.setContentText(errorMessage);
+                        alert.showAndWait();
+                    });
+                }
+            }
+        } else {
+            if (cart != null && media != null) {
+                cart.addMedia(media);
+            }
         }
     }
 

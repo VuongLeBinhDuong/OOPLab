@@ -181,18 +181,33 @@ public class CartController {
         float totalCost = cart.totalCost();
         int numberOfItems = cart.getItemsOrdered().size();
 
-        String notificationMessage = "Order placed successfully!\n" +
-                "Total Cost: $" + String.format("%.2f", totalCost) + "\n" +
-                "Number of Items: " + numberOfItems;
+        if (numberOfItems == 0){
+            String errorMessage = "ERROR: Cart has no item. Cannot place an order.";
+            System.err.println(errorMessage);
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("No item cart");
+                alert.setHeaderText(null);
+                alert.setContentText(errorMessage);
+                alert.showAndWait();
+            });
+        }
+        else {
+            String notificationMessage = "Order placed successfully!\n" +
+                    "Total Cost: $" + String.format("%.2f", totalCost) + "\n" +
+                    "Number of Items: " + numberOfItems;
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Order Confirmation");
-        alert.setHeaderText(null);
-        alert.setContentText(notificationMessage);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Order Confirmation");
+            alert.setHeaderText(null);
+            alert.setContentText(notificationMessage);
 
-        alert.showAndWait();
+            alert.showAndWait();
 
-        cart = new Cart();
+            cart = new Cart();
+            initialize();
+        }
+
     }
 
     @FXML
