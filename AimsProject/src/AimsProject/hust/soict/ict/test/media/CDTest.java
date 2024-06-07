@@ -12,6 +12,5 @@ public class CDTest {
         compactDisc.addTrack(track2);
         Track track3 = new Track("Track3", 20);
         compactDisc.addTrack(track3);
-        compactDisc.play();
     }
 }

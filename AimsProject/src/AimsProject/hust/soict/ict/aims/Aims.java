@@ -1,9 +1,11 @@
 package AimsProject.hust.soict.ict.aims;
 
 import AimsProject.hust.soict.ict.aims.cart.Cart;
+import AimsProject.hust.soict.ict.aims.exception.CartFullException;
 import AimsProject.hust.soict.ict.aims.media.*;
 import AimsProject.hust.soict.ict.aims.store.Store;
 
+import javax.naming.LimitExceededException;
 import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +58,7 @@ public class Aims {
 		System.out.println("Please choose a number: 0-1-2-3-4-5");
 	}
 
-	public static void viewStore(){
+	public static void viewStore() throws LimitExceededException, CartFullException{
 		int choice;
 		do {
 			storeMenu();
@@ -137,7 +139,7 @@ public class Aims {
 		}
 	}
 
-	public static void seeAMediaDetail(Media searchTitle){
+	public static void seeAMediaDetail(Media searchTitle) throws LimitExceededException, CartFullException {
 		int choice;
 		do {
 			mediaDetailsMenu();
@@ -163,7 +165,7 @@ public class Aims {
 		}
 	}
 
-	public static void seeCurrentCart(){
+	public static void seeCurrentCart() throws LimitExceededException, CartFullException{
 		int choice;
 		do {
 			cartMenu();
@@ -371,7 +373,7 @@ public class Aims {
 	public static Store store = new Store();
 	public static List<Media> itemsInStore = store.getItemsInStore();
 
-	public static void mainMenu() {
+	public static void mainMenu () throws LimitExceededException, CartFullException{
 		Scanner input = new Scanner(System.in);
 		int choice;
 		do {
@@ -401,7 +403,7 @@ public class Aims {
 		}
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws LimitExceededException, CartFullException{
 		DigitalVideoDisc dvd1 = new DigitalVideoDisc(1, "The Lion King", "Animation", 19.95f, 87, "Roger Allers");
 		store.addMedia(dvd1);
 		CompactDisc cd2 = new CompactDisc(2, "Star Wars", "Science Friction", 24.95f, "Director 1", "Artist 1");

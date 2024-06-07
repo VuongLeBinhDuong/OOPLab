@@ -1,6 +1,7 @@
 package AimsProject.hust.soict.ict.test.cart;
 
 import AimsProject.hust.soict.ict.aims.cart.Cart;
+import AimsProject.hust.soict.ict.aims.exception.CartFullException;
 import AimsProject.hust.soict.ict.aims.media.*;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Comparator;
 public class CartTest {
 	public static Cart anOrder = new Cart();
 	public static List<Media> itemsInOrdered = anOrder.getItemsOrdered();
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CartFullException {
 
 		DigitalVideoDisc dvd1 = new DigitalVideoDisc(1, "The Lion King", "Animation", 19.95f, 87, "Roger Allers");
 		anOrder.addMedia(dvd1);

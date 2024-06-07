@@ -1,6 +1,9 @@
 package AimsProject.hust.soict.ict.aims.media;
 
+import AimsProject.hust.soict.ict.aims.exception.PlayerException;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class CompactDisc extends Disc implements Playable{
@@ -24,6 +27,10 @@ public class CompactDisc extends Disc implements Playable{
 	public CompactDisc (int id, String title, String category, float cost, String director, String artist, List<Track> tracks){
 		super(id, title, category, cost, director );
 		this.artist = artist;
+		this.tracks = tracks;
+	}
+	public CompactDisc (int id, String title, String category, float cost, String director, List<Track> tracks){
+		super(id, title, category, cost, director );
 		this.tracks = tracks;
 	}
 	public CompactDisc (int id, String title, String category, float cost, String director, String artist) {
@@ -61,16 +68,27 @@ public class CompactDisc extends Disc implements Playable{
         }
         return totalLength;
 	}
-	public void play() {
-		for (int i=0;i<tracks.size();i++) {
-			if (tracks.get(i).getLength() > 0){
-				tracks.get(i).play();
-			}
-			else {
-				System.out.println("The track " + tracks.get(i).getTitle() + " cannot be played");
+
+	@Override
+	public void play() throws PlayerException {
+		if(this.getLength() > 0){
+			Iterator iter = tracks.iterator();
+			Track nextTrack;
+			while (iter.hasNext()){
+				nextTrack = (Track) iter.next();
+				try{
+					nextTrack.play();
+				}
+				catch (PlayerException e){
+					throw e;
+				}
 			}
 		}
+		else {
+			throw new PlayerException("ERROR: CD length is non-positive!");
+		}
 	}
+
 	public String toString() {
         return "CD: " + super.toString() + " - " + getArtist() + " - " + getTracksName();
     }

@@ -1,5 +1,7 @@
 package AimsProject.hust.soict.ict.aims.media;
 
+import AimsProject.hust.soict.ict.aims.exception.PlayerException;
+
 import java.util.Objects;
 
 public class Track implements Playable{
@@ -15,10 +17,16 @@ public class Track implements Playable{
 		this.title = title;
 		this.length = length;
 	}
-	
-	public void play() {
-		System.out.println("Playing Track: " + this.getTitle());
-		System.out.println("Track length: " + this.getLength());
+
+	@Override
+	public void play() throws PlayerException {
+		if (this.getLength() <= 0) {
+			System.err.println("ERROR: Track length is non-positive.");
+			throw new PlayerException("Track length is non-positive.");
+		}
+		// Code to play the track
+		System.out.println("Playing track: " + this.title);
+		System.out.println("Track length: " + this.length);
 	}
 	 @Override
 	 public boolean equals(Object obj) {
